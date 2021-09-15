@@ -219,6 +219,17 @@ public class BTreeTest {
     }
 
     @Test(timeout = 1000)
+    public void maxOnEmptyBTree() {		
+        // Create a BTree with no keys or children.		
+        BTree<Integer> bTree = new BTree<>(3);		
+        // Call .max() and assert null is returned. If an exception is thrown, than the user will get an exception on the test.		
+        assertNull(		
+                "\n.max() failed on empty Btree. Your return should be: null but is not",		
+                bTree.max()		
+        );		
+    }
+
+    @Test(timeout = 1000)
     public void maxWithoutSplitTest() {
         // Create a BTree and ensure the root has no children
         BTree<Integer> bTree = new BTree<>(3);
