@@ -59,15 +59,29 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
         if (element == null)
             throw new IllegalArgumentException("Input cannot be null");
 
+        AVLTree<T> result;
         if (element.compareTo(value) > 0) {
             // COMPLETE
-        } else if (element.compareTo(value) < 0) {
-            // COMPLETE
-        } else {
-            // COMPLETE
+            result= new AVLTree<>(value, leftNode, rightNode.insert(element));
+            return getBalance(result);
+        } else if(element.compareTo(value) < 0) {
+            result= new AVLTree<>(value, leftNode.insert(element), rightNode);
+            return getBalance(result);
+        }else {
+            return this;
+        }
+         // Change to return something different
+    }
+
+    public AVLTree<T> getBalance(AVLTree<T> node){
+        if(node.getBalanceFactor()<-1){
+            return node.leftRotate();
+        }else if(node.getBalanceFactor()>1){
+            return node.rightRotate();
+        }else {
+            return node;
         }
 
-        return this; // Change to return something different
     }
 
     /**
@@ -92,11 +106,29 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
             than something about your code is incorrect!
          */
 
-        Tree<T> newParent = this.rightNode;
-        Tree<T> newRightOfCurrent = newParent.leftNode;
+
         // COMPLETE
 
-        return null; // Change to return something different
+        // RR
+        if(((AVLTree<T>)this.rightNode).getBalanceFactor()<=0){
+            Tree<T> newParent = this.rightNode;
+            Tree<T> newRightOfCurrent = newParent.leftNode;
+            this.rightNode=newRightOfCurrent;
+            newParent.leftNode=this;
+            return new AVLTree<>(newParent.value,newParent.leftNode,newParent.rightNode);
+        }
+        // RL
+        else {
+            Tree<T> B = this.rightNode;
+            Tree<T> C = this.rightNode.leftNode;
+            this.rightNode=C.leftNode;
+            B.leftNode=C.rightNode;
+            return new AVLTree<>(C.value,this,B);
+
+
+        }
+
+        //return null; // Change to return something different
     }
 
     /**
@@ -120,8 +152,25 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
             (AVLTree$EmptyAVL and AVLTree are in unnamed module of loader 'app')'
             than something about your code is incorrect!
          */
+        //Tree<T> newParent = this.leftNode;
+        // LL
+        if(((AVLTree<T>)this.leftNode).getBalanceFactor()>=0){
+            Tree<T> newParent = this.leftNode;
+            Tree<T> newRightOfCurrent = newParent.rightNode;
+            this.leftNode=newRightOfCurrent;
+            newParent.rightNode=this;
+            return new AVLTree<>(newParent.value,newParent.leftNode,newParent.rightNode);
+        }
+        // LR
+        else {
+            Tree<T> newLeft = this.leftNode;
+            Tree<T> newParent = this.leftNode.rightNode;
+            this.leftNode=newParent.rightNode;
+            newLeft.rightNode=newParent.leftNode;
+            return new AVLTree<>(newParent.value,newLeft,this);
+        }
 
-        return null; // Change to return something different
+        //return null; // Change to return something different
     }
 
     /**
