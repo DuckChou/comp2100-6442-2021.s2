@@ -59,10 +59,11 @@ public class RBTree<T extends Comparable<T>> {
 	}
 
 	public boolean isDirectParent(Node root,Node leave){
-		if(leave.parent==null)
-			return false;
-		else if(leave.equals(root))
+		if(leave.equals(root))
 			return true;
+		else if(leave.parent==null)
+			return false;
+
 		else
 			return isDirectParent(root,leave.parent);
 	}
