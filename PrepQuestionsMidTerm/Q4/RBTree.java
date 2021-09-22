@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * Implement a function in Red-Black Tree to check if the following property hold:
@@ -17,10 +19,55 @@ public class RBTree<T extends Comparable<T>> {
 	 */
 	public boolean testProp3() {
 		// START YOUR CODE
-		
-		return false; //you are allowed to change this return statement
+		List<Node> leaves = new ArrayList<>();
+		List<Node> notLeaves = new ArrayList<>();
+
+		traverseForLeaves(root,leaves,notLeaves);
+
+		for(Node notLeave:notLeaves){
+			root = notLeave;
+			List<Node> check = new ArrayList<>();
+			for(Node leave:leaves){
+				if(isDirectParent(notLeave,leave)){
+					check.add(leave);
+				}
+			}
+			if(check.size()==0)
+				continue;
+			int n = check.get(0).blackParentCount();
+			for(Node node:check){
+				if(node.blackParentCount()!=n)
+					return false;
+			}
+		}
+
+
+		return true; //you are allowed to change this return statement
 		// END YOUR CODE
 	}
+
+	public void traverseForLeaves(Node node, List<Node> leaves,List<Node> notLeaves){
+		if(node==null)
+			return;
+		traverseForLeaves(node.left,leaves,notLeaves);
+		if(node.value==null){
+			leaves.add(node);
+		}else
+			notLeaves.add(node);
+
+		traverseForLeaves(node.right,leaves,notLeaves);
+	}
+
+	public boolean isDirectParent(Node root,Node leave){
+		if(leave.parent==null)
+			return false;
+		else if(leave.equals(root))
+			return true;
+		else
+			return isDirectParent(root,leave.parent);
+	}
+
+
 
 	/**
 	 * Initialize empty RBTree
