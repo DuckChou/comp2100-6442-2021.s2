@@ -6,6 +6,7 @@
 public class BST {
 	
 	Node root;
+	int sum;
 
 	/**
 	 * Please implement this method and feel free to add additional helper methods
@@ -13,9 +14,21 @@ public class BST {
 	 */
 	public Integer oddNodeSum() {
 		// START YOUR CODE
-		
-		return null; //you are allowed to change this return statement
+		traverse(root);
+		return sum; //you are allowed to change this return statement
 		// END YOUR CODE
+	}
+
+	public void traverse(Node node){
+
+		if (node==null)
+			return;
+		traverse(node.left);
+		if(node.isOddChild()){
+			sum+=node.value;
+		}
+		traverse(node.right);
+
 	}
 	
 	public BST() {
@@ -72,5 +85,10 @@ public class BST {
 			this.left = null;
 			this.right = null;
 		}
+		public boolean isOddChild(){
+			return (left == null && right != null) || (left != null && right == null);
+		}
 	}
+
+
 }
