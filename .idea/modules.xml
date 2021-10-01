@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lab_01_Warmup/Lab_01_Warmup.iml" filepath="$PROJECT_DIR$/Lab_01_Warmup/Lab_01_Warmup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab_03_Soft_Testing/Lab_03_Soft_Testing.iml" filepath="$PROJECT_DIR$/Lab_03_Soft_Testing/Lab_03_Soft_Testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab_04_DataStructure/Lab_04_DataStructure.iml" filepath="$PROJECT_DIR$/Lab_04_DataStructure/Lab_04_DataStructure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab_05_DataStructure2/Lab_05_DataStructure2.iml" filepath="$PROJECT_DIR$/Lab_05_DataStructure2/Lab_05_DataStructure2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lecture_Soft_Testing/Lecture_Soft_Testing.iml" filepath="$PROJECT_DIR$/Lecture_Soft_Testing/Lecture_Soft_Testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PrepQuestionsMidTerm/PrepQuestionsMidTerm.iml" filepath="$PROJECT_DIR$/PrepQuestionsMidTerm/PrepQuestionsMidTerm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comp2100-6442-2021.s2.iml" filepath="$PROJECT_DIR$/comp2100-6442-2021.s2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midexam/midexam.iml" filepath="$PROJECT_DIR$/midexam/midexam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PrepQuestionsMidTerm/t2.iml" filepath="$PROJECT_DIR$/PrepQuestionsMidTerm/t2.iml" />
+    </modules>
+  </component>
+</project>

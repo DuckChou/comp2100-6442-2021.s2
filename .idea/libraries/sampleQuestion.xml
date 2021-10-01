@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sampleQuestion">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/PrepQuestionsMidTerm/sampleQuestion/sampleQuestion.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

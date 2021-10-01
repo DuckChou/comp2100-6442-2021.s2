@@ -26,6 +26,11 @@ public class StatementCompleteTest {
         // Implement your test cases
         // START YOUR CODE
 
+        // For statement 1, number is positive
+        assertEquals(0,StatementComplete.sumAndMultiply(-7));
+        // For statement 2, number is negative
+        assertEquals(75,StatementComplete.sumAndMultiply(5));
+
 
         // END YOUR CODE
     }

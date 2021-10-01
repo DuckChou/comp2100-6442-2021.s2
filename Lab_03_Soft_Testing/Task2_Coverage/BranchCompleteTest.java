@@ -20,6 +20,16 @@ public class BranchCompleteTest {
         // Implement your test cases
         // START YOUR CODE
 
+        // branch "42"
+        assertEquals(BranchComplete.Action.ABDUCT,BranchComplete.attemptToMakeFriend("42"));
+        // branch "wolf"
+        assertEquals(BranchComplete.Action.PET,BranchComplete.attemptToMakeFriend("wolf"));
+        // branch "ok"
+        assertEquals(BranchComplete.Action.SMILE,BranchComplete.attemptToMakeFriend("ok"));
+        // branch default
+        assertEquals(BranchComplete.Action.CRY,BranchComplete.attemptToMakeFriend("99"));
+
+
         // END YOUR CODE
     }
 }
