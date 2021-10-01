@@ -1,5 +1,22 @@
-[Tt]humbs.db
+# This file tells git to 'ignore' certain files/directories when making commits.
+# Feel free to add to this file to account for your needs!
+
+# Intellij
+*.idea*
+*/out
+*.iml
+
+# Eclipse
+*.classpath
+*.settings/
+*.project
+
+# Visual Studo Code
+*.vs
+*.vscode
+
+# Misc
 *.DS_Store
-.classpath
-.project
-.class
+*.metadata
+*.class
+[Tt]humbs.db
