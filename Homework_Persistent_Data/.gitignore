@@ -1,0 +1,3 @@
+// Serves to ignore specific files relevant to this directory (which are not useful elsewhere).
+src/my_book_collection*
+my_book_collection*
