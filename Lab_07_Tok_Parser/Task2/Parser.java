@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -30,6 +32,7 @@ public class Parser {
 
     // The tokenizer (class field) this parser will use.
     Tokenizer tokenizer;
+    int timeOfCheck=0;
 
     /**
      * Parser class constructor
@@ -74,6 +77,34 @@ public class Parser {
         }
     }
 
+    public boolean checkValid(List<Token> check){
+
+
+        int numOfLBRA = 0;
+        int numOfRBRA = 0;
+
+        int numOfOperator = 0;
+
+        for(int i=0;i<check.size();i++){
+            if(check.get(i).getType().equals(Token.Type.SUB)||check.get(i).getType().equals(Token.Type.ADD)||check.get(i).getType().equals(Token.Type.MUL)||check.get(i).getType().equals(Token.Type.DIV)){
+                if(i==check.size()-1||(check.get(i+1).getType().equals(Token.Type.SUB)||check.get(i+1).getType().equals(Token.Type.ADD)||check.get(i+1).getType().equals(Token.Type.MUL)||check.get(i+1).getType().equals(Token.Type.DIV)))
+                    return false;
+                else
+                    numOfOperator++;
+            }
+
+            if(check.get(i).getType().equals(Token.Type.LBRA))
+                numOfLBRA++;
+            if(check.get(i).getType().equals(Token.Type.RBRA))
+                numOfRBRA++;
+
+        }
+        if(numOfLBRA!=numOfRBRA||numOfOperator==0){
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Adheres to the grammar rule:
      * <exp>    ::= <term> | <term> + <exp> | <term> - <exp>
@@ -89,8 +120,30 @@ public class Parser {
          */
         // ########## YOUR CODE STARTS HERE ##########
 
+        List<Token> check = new ArrayList<>();
 
-        return null; // Change this return (if you want). It is simply a placeholder to prevent an error.
+        while(tokenizer.hasNext()){
+        check.add(tokenizer.current());
+        tokenizer.next();
+        }
+
+        if(timeOfCheck==0&&!checkValid(check)){
+            timeOfCheck++;
+            throw new IllegalProductionException("");
+        }else {
+            for(int i=0;i<check.size();i++){
+                if(check.get(i).getType().equals(Token.Type.ADD)){
+                    return new AddExp(parseTerm(check.subList(0,i)),parseTerm(check.subList(i+1,check.size())));
+                }
+                else if (check.get(i).getType().equals(Token.Type.SUB)){
+                    return new SubExp(parseTerm(check.subList(0,i)),parseTerm(check.subList(i+1,check.size())));
+                }
+            }
+            return parseTerm(check);
+
+        }
+
+        //return null; // Change this return (if you want). It is simply a placeholder to prevent an error.
         // ########## YOUR CODE ENDS HERE ##########
     }
 
@@ -100,7 +153,7 @@ public class Parser {
      *
      * @return type: Exp.
      */
-    public Exp parseTerm() {
+    public Exp parseTerm(List<Token> list) {
         /*
          TODO: Implement parse function for <term>.
          TODO: Throw an IllegalProductionException if provided with tokens not conforming to the grammar.
@@ -109,7 +162,21 @@ public class Parser {
         // ########## YOUR CODE STARTS HERE ##########
 
 
-        return null; // Change this return (if you want). It is simply a placeholder to prevent an error.
+
+            for(int i=0;i<list.size();i++){
+                if(list.get(i).getType().equals(Token.Type.MUL)){
+                    return new MultExp(parseTerm(list.subList(0,i)),parseTerm(list.subList(i+1,list.size())));
+                }
+                else if (list.get(i).getType().equals(Token.Type.DIV)){
+                    return new DivExp(parseTerm(list.subList(0,i)),parseTerm(list.subList(i+1,list.size())));
+                }
+            }
+        return parseFactor(list.get(0));
+
+
+
+
+        //return null; // Change this return (if you want). It is simply a placeholder to prevent an error.
         // ########## YOUR CODE ENDS HERE ##########
     }
 
@@ -119,7 +186,7 @@ public class Parser {
      *
      * @return type: Exp.
      */
-    public Exp parseFactor() {
+    public Exp parseFactor(Token token) {
         /*
          TODO: Implement parse function for <factor>.
          TODO: Throw an IllegalProductionException if provided with tokens not conforming to the grammar.
@@ -129,7 +196,7 @@ public class Parser {
         // ########## YOUR CODE STARTS HERE ##########
 
 
-        return null; // Change this return (if you want). It is simply a placeholder to prevent an error.
+        return new IntExp(Integer.parseInt(token.getToken())); // Change this return (if you want). It is simply a placeholder to prevent an error.
         // ########## YOUR CODE ENDS HERE ##########
     }
 }

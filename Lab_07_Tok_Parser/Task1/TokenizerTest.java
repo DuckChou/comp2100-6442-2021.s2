@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-
 import org.junit.Test;
 
 public class TokenizerTest {
@@ -157,5 +156,19 @@ public class TokenizerTest {
                 tokenizer.next();
             }
         });
+    }
+    @Test
+    public void myTest(){
+        tokenizer = new Tokenizer("-40)/");
+        assertEquals(new Token("-", Token.Type.SUB), tokenizer.current());
+
+        // test second token *
+        tokenizer.next();
+        assertEquals(new Token("40", Token.Type.INT), tokenizer.current());
+
+        // test sixth token )
+        tokenizer.next();
+        assertEquals(new Token(")", Token.Type.RBRA), tokenizer.current());
+
     }
 }

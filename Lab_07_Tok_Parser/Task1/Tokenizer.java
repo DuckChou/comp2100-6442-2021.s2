@@ -77,7 +77,7 @@ public class Tokenizer {
         char firstChar = buffer.charAt(0);
         if (firstChar == '+')
             currentToken = new Token("+", Token.Type.ADD);
-        if (firstChar == '-')
+        else if (firstChar == '-')
             currentToken = new Token("-", Token.Type.SUB);
 
         /*
@@ -88,8 +88,29 @@ public class Tokenizer {
          Hint: Character.isDigit() may be useful.
          */
         // ########## YOUR CODE STARTS HERE ##########
+        else if (firstChar == '*')
+            currentToken = new Token("*", Token.Type.MUL);
+        else if (firstChar == '/')
+            currentToken = new Token("/", Token.Type.DIV);
+        else if (firstChar == '(')
+            currentToken = new Token("(", Token.Type.LBRA);
+        else if (firstChar == ')')
+            currentToken = new Token(")", Token.Type.RBRA);
+        else if(Character.isDigit(firstChar)){
+            int i=0;
+            while (Character.isDigit(buffer.charAt(i))){
+                if((i+1)==buffer.length()){
 
-
+                    i++;
+                    break;
+                }else {
+                    i++;
+                }
+            }
+            currentToken = new Token(buffer.substring(0,i), Token.Type.INT);
+        }
+        else
+            throw new Token.IllegalTokenException("");
 
         // ########## YOUR CODE ENDS HERE ##########
         // Remove the extracted token from buffer
@@ -116,4 +137,7 @@ public class Tokenizer {
     public boolean hasNext() {
         return currentToken != null;
     }
+
+    public String getBuffer(){return buffer;}
+
 }
